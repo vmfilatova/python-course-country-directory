@@ -23,7 +23,7 @@ class TestClientCountry:
         assert await client.get_base_url() == self.base_url
 
     async def test_get_countries(self, mocker, client):
-        mocker.patch('clients.country.CountryClient._request')
+        mocker.patch("clients.country.CountryClient._request")
         await client.get_countries()
         client._request.assert_called_once_with(f"{self.base_url}/regional_bloc/eu")
 
