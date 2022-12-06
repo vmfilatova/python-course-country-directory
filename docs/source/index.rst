@@ -59,21 +59,21 @@
 2. Соберите Docker-контейнер с помощью Docker Compose:
     .. code-block:: console
 
-        docker-compose build
+        docker compose build
 
     Данную команду необходимо выполнять повторно в случае обновления зависимостей в файле `requirements.txt`.
 
 3. Чтобы просмотреть документацию по использованию консольного приложения, выполните:
     .. code-block:: console
 
-        docker-compose run app python main.py --help
+        docker compose run app python main.py --help
 
     Данная команда выведет на экран список доступных аргументов и их значения по умолчанию.
 
 4. Для запуска приложения выполните:
     .. code-block:: console
 
-        docker-compose up cron
+        docker compose up cron
 
     Запустится фоновая программа, которая будет собирать информацию о странах из различных источников и сохранять
     её в файлы в директории `media`. Процесс сбора данных запускается один раз в минуту.
@@ -87,7 +87,7 @@
 
     .. code-block:: console
 
-        docker-compose run app
+        docker compose run app
 
     Запуск можно производить с уже работающей программой для сбора данных (она работает "в фоне").
     После выполнения этой команды программа предложит ввести строку для поиска информации о стране.
@@ -97,7 +97,7 @@
        Для настройки параметров запуска следует передать консольной команде аргументы в соответствии с её документацией:
         .. code-block:: console
 
-            docker-compose run app python main.py --location London
+            docker compose run app python main.py --location London
 
         Таким образом можно определять параметры запуска в команде.
 
@@ -122,7 +122,7 @@
 
 .. code-block:: console
 
-    docker-compose run app pytest --cov=/src --cov-report html:htmlcov --cov-report term --cov-config=/src/tests/.coveragerc -vv
+    docker compose run app pytest --cov=/src --cov-report html:htmlcov --cov-report term --cov-config=/src/tests/.coveragerc -vv
 
 Также существует аналогичная `make`-команда:
 
