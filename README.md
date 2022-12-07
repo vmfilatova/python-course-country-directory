@@ -30,6 +30,14 @@ Install the appropriate software:
     The sample file (`.env.sample`) contains a set of variables with default values. 
     So it can be configured depending on the environment.
 
+    To access the API, visit the appropriate resources and obtain an access token:
+    - APILayer – Geography API (https://apilayer.com/marketplace/geo-api)
+    - OpenWeather – Weather Free Plan (https://openweathermap.org/price#weather)
+   
+    Set received access tokens as environment variable values (in `.env` file):
+    - `API_KEY_APILAYER` – for APILayer access token
+    - `API_KEY_OPENWEATHER` – for OpenWeather access token
+
 2. Build the container using Docker Compose:
     ```shell
     docker compose build
@@ -42,15 +50,29 @@ Install the appropriate software:
     docker compose run app python main.py --help
     ```
    
-4. Now it is possible to run the command inside the Docker container 
-    as usual, passing needed arguments to the console application:
+4. To start the application run:
     ```shell
-    docker compose run app python main.py --location London
+    docker compose up cron
     ```
    
-   Also, it is possible to omit the arguments to use their defaults:
+    A background program will start that will collect information about countries from various sources and save
+    it to files in the `media` directory. The data collection process runs once per minute.
+    The frequency of data updates depends on the settings in the variables (in `.env` file):
+
+    - `CACHE_TTL_COUNTRY` (country data up-to-date time in seconds)
+    - `CACHE_TTL_CURRENCY_RATES` (currency rates data up-to-date time in seconds)
+    - `CACHE_TTL_WEATHER` (weather data up-to-date time in seconds)
+   
+5. After collecting all the data, you can query the country information by executing the command:
     ```shell
     docker compose run app
+    ```
+   
+    This command will use its default parameters. 
+
+    You can also specify needed parameters:
+    ```shell
+    docker compose run app python main.py --location London
     ```
 
 ### Automation commands
