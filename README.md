@@ -52,7 +52,7 @@ Install the appropriate software:
    
 4. To start the application run:
     ```shell
-    docker compose up cron
+    c
     ```
    
     A background program will start that will collect information about countries from various sources and save

@@ -28,7 +28,7 @@ class WeatherClient(BaseClient):
 
                 return None
 
-    async def get_weather(self, location: str) -> Optional[dict]:
+    async def get_weather(self, location: str = "London") -> Optional[dict]:
         """
         Получение данных о погоде.
 

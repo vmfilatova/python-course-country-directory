@@ -7,6 +7,11 @@ import asyncclick as click
 from reader import Reader
 from renderer import Renderer
 
+# import tabulate
+
+
+# from tabulate import tabulate
+
 
 @click.command()
 @click.option(
@@ -29,7 +34,7 @@ async def process_input(location: str) -> None:
         lines = await Renderer(location_info).render()
 
         for line in lines:
-            click.secho(line, fg="green")
+            click.secho("| {:20} | {:100} ".format(*line), fg="green")
     else:
         click.secho("Информация отсутствует.", fg="yellow")
 

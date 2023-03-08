@@ -90,6 +90,7 @@ class CountryDTO(BaseModel):
             name="\u00c5land Islands",
             population=28875,
             subregion="Northern Europe",
+            area=1580.0,
             timezones=[
                 "UTC+02:00",
             ],
@@ -106,6 +107,7 @@ class CountryDTO(BaseModel):
     population: int
     subregion: str
     timezones: list[str]
+    area: float | None
 
 
 class CurrencyRatesDTO(BaseModel):
@@ -146,8 +148,65 @@ class WeatherInfoDTO(BaseModel):
     temp: float
     pressure: int
     humidity: int
+    visibility: int
     wind_speed: float
     description: str
+    lon: float
+    lat: float
+    timezone: int
+
+
+class NewsArticlesDTO(HashableBaseModel):
+    """
+    Модель данных о статье
+    .. code-block::
+        NewsArticlesDTO(
+            id="google-news",
+            name="Google News,
+            author="Fox Business",
+            title="Nordstrom leaving Canada, cutting 2,500 jobs - Fox Business",
+            description="Some text",
+            url="link",
+            publishedAt="2023-03-03T06:03:32Z",
+            content="Some content"
+        )
+    """
+
+    id: str | None
+    name: str | None
+    author: str | None
+    title: str | None
+    description: str | None
+    url: str | None
+    publishedAt: str | None
+    content: str | None
+
+
+class NewsInfoDTO(BaseModel):
+    """
+    Модель данных о новостях
+    .. code-block::
+        NewsDTO(
+            status="ok",
+            totalResults:70,
+            articles[
+                NewsSourceInfoDTO(
+                    id="google-news",
+                    name="Google News,
+                    author="Fox Business",
+                    title="Nordstrom leaving Canada, cutting 2,500 jobs - Fox Business",
+                    description="Some text",
+                    url="link",
+                    publishedAt="2023-03-03T06:03:32Z",
+                    content="Some content"
+                )
+            ]
+        )
+    """
+
+    status: str
+    totalResults: int
+    articles: set[NewsArticlesDTO]
 
 
 class LocationInfoDTO(BaseModel):
@@ -181,6 +240,7 @@ class LocationInfoDTO(BaseModel):
                 name="\u00c5land Islands",
                 population=28875,
                 subregion="Northern Europe",
+                area=1580.0,
                 timezones=[
                     "UTC+02:00",
                 ],
@@ -201,3 +261,4 @@ class LocationInfoDTO(BaseModel):
     location: CountryDTO
     weather: WeatherInfoDTO
     currency_rates: dict[str, float]
+    news: NewsInfoDTO
